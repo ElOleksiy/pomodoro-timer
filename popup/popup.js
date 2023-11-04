@@ -1,22 +1,36 @@
 const addTaskBtn = document.getElementById("add-task-btn");
 
-const tasks = [];
+let tasks = [];
+addTaskBtn.addEventListener("click", () => addTask());
 
+chrome.storage.sync.get(["tasks"], (res) => {
+  tasks = res.tasks ? res.tasks : [];
+  tasks.forEach((task, taskNum) => {
+    renderTask(taskNum);
+  });
+});
+
+function saveTasks() {
+  chrome.storage.sync.set({
+    tasks,
+  });
+}
 function renderTask(taskNum) {
   const taskRow = document.createElement("div");
+
   const text = document.createElement("input");
   text.type = "text";
-  text.placeholder = "Enter a task";
-  text.value = tasks[tasks.length];
-
+  text.placeholder = "Enter a task...";
+  text.value = tasks[taskNum];
   text.addEventListener("change", () => {
-    tasks[tasks.length] = text.value;
+    tasks[taskNum] = text.value;
+    saveTasks();
   });
 
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "X";
   deleteBtn.addEventListener("click", () => {
-    deleteBtn(tasks.length);
+    deleteTask(taskNum);
   });
 
   taskRow.appendChild(text);
@@ -26,23 +40,24 @@ function renderTask(taskNum) {
   taskContainer.appendChild(taskRow);
 }
 
-addTaskBtn.addEventListener("click", () => addTask());
 function addTask() {
+  const taskNum = tasks.length;
   tasks.push("");
-  renderTask(tasks.length);
+  renderTask(taskNum);
+  saveTasks();
 }
 
-function deleteBtn(taskNum) {
+function deleteTask(taskNum) {
   tasks.splice(taskNum, 1);
-  renderTask();
+  renderAllTasks();
+  saveTasks();
 }
 
-function renderTask() {
-  const taskContainer = document.getElementsById("task-container");
-  taskContainer.textContent = "";
+function renderAllTasks() {
+  const textContainer = document.getElementById("task-container");
+  textContainer.textContent = "";
+
   tasks.forEach((taskText, taskNum) => {
     renderTask(taskNum);
   });
 }
-
-const startTimerBtn = document.getElementById("start-timer-btn");
