@@ -1,3 +1,13 @@
+function updateTime() {
+  chrome.storage.local.get(["timer"], (res) => {
+    const time = document.getElementById("time");
+    time.textContent = res.timer;
+    console.log(res.timer);
+  });
+}
+
+updateTime();
+setInterval(updateTime, 1000);
 const addTaskBtn = document.getElementById("add-task-btn");
 
 const startTimerBtn = document.getElementById("start-timer-btn");
@@ -30,6 +40,7 @@ resetTimerBtn.addEventListener("click", () => {
 });
 
 let tasks = [];
+
 addTaskBtn.addEventListener("click", () => addTask());
 
 chrome.storage.sync.get(["tasks"], (res) => {
