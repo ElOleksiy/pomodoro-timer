@@ -1,8 +1,15 @@
 function updateTime() {
-  chrome.storage.local.get(["timer"], (res) => {
+  chrome.storage.local.get(["timer", "timeOption"], (res) => {
     const time = document.getElementById("time");
-    time.textContent = res.timer;
-    console.log(res.timer);
+    const minutes = `${res.timeOption - Math.ceil(res.timer / 60)}`.padStart(
+      2,
+      "0"
+    );
+    let seconds = "00";
+    if (res.timer % 60 !== 0) {
+      seconds = `${60 - (res.timer % 60)}`.padStart(2, "0");
+    }
+    time.textContent = `${minutes}:${seconds}`;
   });
 }
 

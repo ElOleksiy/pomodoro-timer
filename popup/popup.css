@@ -1,10 +1,41 @@
 body {
   height: 400px;
   width: 300px;
+  background-color: rgb(238, 0, 255);
 }
 
 .header {
   display: flex;
   justify-content: center;
   height: 40px;
+  background-color: aqua;
+  margin: -10px;
+  padding: 5px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #fff;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button-container > button {
+  color: red;
+  background-color: #fff;
+  border: none;
+  border: 5px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+#task-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
