@@ -1,7 +1,18 @@
+:root {
+  --linear-background: linear-gradient(
+    90deg,
+    hsla(0, 0%, 0%, 1) 0%,
+    hsla(34, 100%, 50%, 1) 0%,
+    hsla(11, 80%, 57%, 1) 100%
+  );
+}
+
 body {
   height: 400px;
   width: 300px;
-  background-color: rgb(238, 0, 255);
+  background: hsla(0, 0%, 0%, 1);
+
+  background: var(--linear-background);
 }
 
 .header {
@@ -31,6 +42,7 @@ h1 {
   border: 5px;
   padding: 8px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 #task-container {
