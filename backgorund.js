@@ -13,7 +13,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             body: `${res.timeOption} minutes has passed!`,
             icon: "icon.png",
           });
-
+          setInterval(console.log(timer), 1000);
           timer = 0;
           isRunning = false;
         }

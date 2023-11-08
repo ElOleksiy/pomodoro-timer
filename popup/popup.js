@@ -15,7 +15,6 @@ function updateTime() {
 
 updateTime();
 setInterval(updateTime, 1000);
-const addTaskBtn = document.getElementById("add-task-btn");
 
 const startTimerBtn = document.getElementById("start-timer-btn");
 startTimerBtn.addEventListener("click", () => {
@@ -25,9 +24,9 @@ startTimerBtn.addEventListener("click", () => {
         isRunning: !res.isRunning,
       },
       () => {
-        startTimerBtn.textContent = !res.isRunning
-          ? "Pause Timer"
-          : "Start Timer";
+        startTimerBtn.innerHTML = !res.isRunning
+          ? `<i class="fa-regular fa-circle-play"></i>`
+          : `<i class="fa-regular fa-circle-pause"></i>`;
       }
     );
   });
@@ -108,3 +107,7 @@ function renderAllTasks() {
     renderTask(taskNum);
   });
 }
+
+//  document.getElementById("btn-icon").src = !res.isRunning
+// ? "../icons/pause.svg"
+// : "../icons/start.svg";
