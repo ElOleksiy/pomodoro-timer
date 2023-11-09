@@ -107,7 +107,3 @@ function renderAllTasks() {
     renderTask(taskNum);
   });
 }
-
-//  document.getElementById("btn-icon").src = !res.isRunning
-// ? "../icons/pause.svg"
-// : "../icons/start.svg";
